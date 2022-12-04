@@ -6,6 +6,8 @@ import { AuthProvider } from "../contexts/AuthContext";
 import { Route, Routes } from "react-router-dom"
 import Dashboard from './Dashboard'
 import Login from './Login'
+import PrivateRoute from "./PrivateRoute";
+import ForgotPassword from "./ForgotPassword";
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
             <Route exact path="/" element={<Dashboard/>}/>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/login" element={<Login/>}/>
+            <Route path="/forgot-password" element={<ForgotPassword/>}/>
           </Routes>
         </div>
       </Container>
@@ -24,3 +27,6 @@ function App() {
 }
 
 export default App;
+
+// TODO: make private routes work to lock down routes that should not be accessed by unauthenticated users
+

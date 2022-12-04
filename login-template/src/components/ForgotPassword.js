@@ -1,26 +1,26 @@
 import React, { useRef, useState } from 'react'
 import { Card, Form, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-export default function Login() {
+export default function ForgotPassword() {
   const emailRef = useRef()
-  const passwordRef = useRef()
-  const { login } = useAuth()
+  const { resetPassword } = useAuth()
   const [ error, setError ] = useState("")
   const [ loading, setLoading ] = useState(false)
-  const navigation = useNavigate()
+  const [ message, setMessage ] = useState("")
 
   async function handleSubmit(e) {
     e.preventDefault()
 
     try {
       setError("")
+      setMessage("")
       setLoading(true)
-      await login(emailRef.current.value, passwordRef.current.value)
-      navigation("/")
+      await resetPassword(emailRef.current.value)
+      setMessage("Check your inbox for further instructions")
     } catch {
-      setError('Failed to sign in')
+      setError('Failed to reset password')
     }
 
     setLoading(false)
@@ -30,23 +30,19 @@ export default function Login() {
     <React.Fragment>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Log In</h2>
+          <h2 className="text-center mb-4">Password Reset</h2>
           {error && <Alert variant="danger">{error}</Alert>}
+          {message && <Alert variant="success">{message}</Alert>}
           <Form onSubmit={handleSubmit}>
           <Form.Group id="email">
             <Form.Label>Email</Form.Label>
             <Form.Control type="email" required ref={emailRef} />
           </Form.Group>
-          <Form.Group id="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" required ref={passwordRef} />
-          </Form.Group>
-          <Button disabled={loading} type="submit" className="w-100">Log In</Button>
+          <Button disabled={loading} type="submit" className="w-100">Reset Password</Button>
           </Form>
-          <div className="w-100 text-center mt-3"><Link to="/forgot-password">Forgot Password?</Link></div>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">Need an account? <Link to="/signup">Sign Up</Link></div>
+      <div className="w-100 text-center mt-2"><Link to="/login">Log In</Link></div>
     </React.Fragment>
   )
 }
