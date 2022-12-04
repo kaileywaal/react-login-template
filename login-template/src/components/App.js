@@ -16,8 +16,8 @@ function App() {
       <Container className="d-flex align-items-center justify-content-center" style={{minHeight: "100vh"}}>
         <div className="w-100" style={{maxWidth: "400px"}}>
           <Routes>
-            <Route exact path="/" element={<Dashboard/>}/> 
-            <Route path="/update-profile" element={<UpdateProfile/>}/>
+            <Route exact path="/" element={<PrivateRoute><Dashboard/></PrivateRoute>}/> 
+            <Route path="/update-profile" element={<PrivateRoute><UpdateProfile/></PrivateRoute>}/>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/forgot-password" element={<ForgotPassword/>}/>
@@ -29,6 +29,3 @@ function App() {
 }
 
 export default App;
-
-// TODO: make private routes work to lock down routes that should not be accessed by unauthenticated users
-
