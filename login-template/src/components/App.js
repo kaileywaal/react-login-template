@@ -8,6 +8,7 @@ import Dashboard from './Dashboard'
 import Login from './Login'
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
+import UpdateProfile from "./UpdateProfile";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
       <Container className="d-flex align-items-center justify-content-center" style={{minHeight: "100vh"}}>
         <div className="w-100" style={{maxWidth: "400px"}}>
           <Routes>
-            <Route exact path="/" element={<Dashboard/>}/>
+            <Route exact path="/" element={<Dashboard/>}/> 
+            <Route path="/update-profile" element={<UpdateProfile/>}/>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/forgot-password" element={<ForgotPassword/>}/>
